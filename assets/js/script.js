@@ -211,7 +211,7 @@ function displayDivisionQuestion(operand1, operand2) {
 }
 
 
-**NEED TO FIGURE DIVISION FUCNTION OUT**
+// **NEED TO FIGURE DIVISION FUCNTION OUT**
 
 
 
