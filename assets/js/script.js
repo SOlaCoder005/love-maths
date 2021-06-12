@@ -76,6 +76,10 @@ function runGame(gameType) {
     } else if (gameType ==="multiply") {
 
         displayMultiplyQuestion(num1, num2);
+ 
+    } else if (gameType === "division") {
+
+        displayDivisionQuestion(num1, num2);
 
     } else {
         alert(`Unknown game type: ${gameType}`);
@@ -129,11 +133,16 @@ function calculateCorrectAnswer() {
 
         return [operand1 * operand2, "multiply"];
 
+    } else if (operator === "/") {
+
+        return [operand1 / operand2, "division"];
+
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
     }
 }
+
 
 /**
  The function [incrementScore(){}]: 
@@ -176,14 +185,6 @@ function displayAdditionQuestion(operand1, operand2) {
 
 function displaySubtractQuestion(operand1, operand2) {
 
-    document.getElementById('operand1').textContent = operand1; 
-    document.getElementById('operand2').textContent = operand2; 
-    document.getElementById('operator').textContent = "-"; 
-    
-}
-
-function displayMultiplyQuestion(operand1, operand2) {
-
     document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2; 
     document.getElementById('operand1').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "-";     
@@ -191,10 +192,26 @@ function displayMultiplyQuestion(operand1, operand2) {
      * SYNTAX [operand1 > operand2 ? operand1 : operand2] is a ternary operator, works like an if statment.
      * Syntax above translates to: is x greater than [>] y [?], if so return x, if not, return y [x : y;] (visa versa) 
      * The syntax of this block of code differs from the others as subtraction can produce negative numbers. Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8874c1f318714d9d90b51500812d382c/?child=first]
-    */
+    */   
+}
+
+function displayMultiplyQuestion(operand1, operand2) {
+
+    document.getElementById('operand1').textContent = operand1; 
+    document.getElementById('operand2').textContent = operand2; 
+    document.getElementById('operator').textContent = "x"; 
+}
+
+function displayDivisionQuestion(operand1, operand2) {
+
+    document.getElementById('operand1').textContent = operand1; 
+    document.getElementById('operand2').textContent = operand2; 
+    document.getElementById('operator').textContent = "/";     
+   
 }
 
 
+**NEED TO FIGURE DIVISION FUCNTION OUT**
 
 
 
