@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     let gameType = this.getAttribute("data-type");
                     // Inside this code block [this.] referes to a specific button 
                     // [ alert(`You clicked the ${gameType} button.`); ] This code is commented out as we want the addition game to start once page loads
-                    runGame("gameType"); //set the parameter in the runGame function outside this code block
+                    runGame(gameType); //set the parameter in the runGame function outside this code block
                 }
                 // Use back quotes [``] when asigning text to alert code. 
                 // The alert will present pop-up " You clicked [button clicked]"
@@ -55,9 +55,13 @@ function runGame(gameType) {
 
     //To test: 1) Pass the gameType into the function as an argument. If correct the question will display.
     if (gameType === "addition") {
+
         displayAdditionQuestion(num1, num2);
-    } else if (gameType === "multiply") {
+
+    } else if (gameType ==="multiply") {
+
         displayMultiplyQuestion(num1, num2);
+
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
@@ -99,7 +103,13 @@ function calculateCorrectAnswer() {
     let operator = document.getElementById("operator").innerText; 
 
     if (operator === "+") {
+
         return [operand1 + operand2, "addition"];
+
+    } else if (operator === "x") {
+
+        return [operand1 * operand2, "multiply"];
+
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -142,19 +152,17 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operand1').textContent = operand1; 
     document.getElementById('operand2').textContent = operand2; 
     document.getElementById('operator').textContent = "+"; 
+
 }
 
-// function displaySubtractQuestion() {
+function displayMultiplyQuestion(operand1, operand2) {
 
-// }
+    document.getElementById('operand1').textContent = operand1; 
+    document.getElementById('operand2').textContent = operand2; 
+    document.getElementById('operator').textContent = "x"; 
+    
+}
 
-// function displayMultiplyQuestion() {
-
-// }
-
-// function displayMultiplyQuestion() {
-
-// }
 
 
 
