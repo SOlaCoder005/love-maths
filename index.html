@@ -1,33 +1,24 @@
-function buildTable() {
-    let html = 
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Published</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Maths</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+    <body>
 
-    for (let book of books) {
-        let rowHtml = 
-            <tr>
-                <td>${book.title}</td>
-                <td>${book.author}</td>
-                <td>${book.published}</td>
-            </tr>
-        `;
-        html += rowHtml; 
-    }
-    html +=
-        </tbody>
-    </table>
-    `;
 
-    return html;
-}
-   
-let table = buildTable();
-document.getElementById('books-table').innerHTML = table;
+
+
+
+
+
+        <!--External Script element uses this syntax as advised. Source [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LMR101+2021_T1/courseware/0a4bf408d10c4149bb686457ac11edf6/bff0041fe4e24c15b553355f17f5c7b9/?child=first]-->
+        <script src="assets/js/script.js" type="test/javascript"></script>
+        <noscript>Sorry, but your browser does not support JavaScript.</noscript>
+    </body>
+</html>
+
+
