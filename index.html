@@ -1,0 +1,33 @@
+function buildTable() {
+    let html = 
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Published</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    for (let book of books) {
+        let rowHtml = 
+            <tr>
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.published}</td>
+            </tr>
+        `;
+        html += rowHtml; 
+    }
+    html +=
+        </tbody>
+    </table>
+    `;
+
+    return html;
+}
+   
+let table = buildTable();
+document.getElementById('books-table').innerHTML = table;
