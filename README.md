@@ -20,5 +20,8 @@
 
 #### *Setting up the JS Process:** 
 
-1. functions section
-2. event handler section
+1. HTML set up, make sure all elements are set with attributes, IDs and Class selectors
+2. CSS set-up, apply styling and make sure overall site is responsive
+3. JS form the JS file and fetaures. In the following order: 
+- **Functions section:** decide the funamental functions your site need to have then create the respective template functions. Do not fill in yet.
+- **Event handler section** - identify the main event handler functions

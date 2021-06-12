@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     */
         for (let button of buttons) {
             button.addEventListener("click", function() {
-                if (this.getAttribute("data-type") === "submit"){
+                if (this.getAttribute("data-type") === "submit") {
                     // [ alert("Submission successful!"); ] No longer needed, replaced by [checkAnswer();] function
                     checkAnswer();
                 } else {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Use back quotes [``] when asigning text to alert code. 
                 // The alert will present pop-up " You clicked [button clicked]"
             })
-         }
+        }
         runGame("addition");    
 })
 
@@ -50,24 +50,24 @@ function runGame(gameType) {
     * The console tab in GC Dev Tools was used to test beforehand, before adding this to the .js file
     * This [Math.floor()......] creates two random number between 1 and 25. 
 */
-    let num1 = Math.floor(Math.random() * 25 + 1);
-    let num2 = Math.floor(Math.random() * 25 + 1);
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
 
     //To test: 1) Pass the gameType into the function as an argument. If correct the question will display.
     if (gameType === "addition") {
-        displayAdditionQuestion(num1, num2); 
-    } 
-    //To test: 2) If incorrect, it will throw an error [ i.e. use of 'else'], this will appear as a pop-up box in window
-    else {
+        displayAdditionQuestion(num1, num2);
+    } else if (gameType === "multiply") {
+        displayMultiplyQuestion(num1, num2);
+    } else {
         alert(`Unknown game type: ${gameType}`);
-    //This throw message will display in the console when unidentified game type is clicked (e.g. division)
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
 }
+
 /** 
- * The function [checkAnswer(){}...] is used to; check the answer against first element in the returned [calculateCorrectAnswer();] array
+* The function [checkAnswer(){}...] is used to; check the answer against first element in the returned [calculateCorrectAnswer();] array
+*Tutorial Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first]
 */
-/*Tutorial Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] */
 function checkAnswer() {
     let userAnswer = parseInt(document.getElementById("answer-box").value);
     let calculatedAnswer = calculateCorrectAnswer();
@@ -75,10 +75,13 @@ function checkAnswer() {
 
     if (isCorrect) {
        alert("Well Done! You aced it, that's the correct answer!"); 
+       incrementScore();
+       //integral to tally feature on site, see the correlating functions below for set-up
     } else {
-        alert(`Really? Yuu answered ${userAnswer}. The correct answer is ${calculatedAnswer[0]}, bruh.`);
+        alert(`Really? You answered ${userAnswer}. The correct answer is ${calculatedAnswer[0]}`);
+        incrementWrongAnswer();
+        //integral to tally feature on site, see the correlating functions below for set-up
     }
-    
     runGame(calculatedAnswer[1]);
 }
 
@@ -87,49 +90,71 @@ function checkAnswer() {
     1) Get the operand(s) (i.e. numbers) and the operator(s) ("+", "-", "/" and/or "x")
     from the DOM.
     2) Returns th correct answer from the  above process
-    Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] 
 */
 function calculateCorrectAnswer() {
-//[parseInt] overides JS's default string function (JS handles values as a string). As such [parseInt] handles values as an interger
+    //Tutorial Source:  [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] 
+    //[parseInt] overides JS's default string function (JS handles values as a string). As such [parseInt] handles values as an interger
     let operand1 = parseInt(document.getElementById('operand1').innerText);
     let operand2 = parseInt(document.getElementById('operand2').innerText);
     let operator = document.getElementById("operator").innerText; 
 
     if (operator === "+") {
-        return [operand1 + operand2, "additon"];
+        return [operand1 + operand2, "addition"];
     } else {
-        alert(`The operator ${operator} has not been implemented!`);
-        throw `unimplemented operator ${operator}. Aborting!`;
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
     }
 }
 
+/**
+ The function [incrementScore(){}]: 
+ 1) Is used to get the current score
+ 2) It increments score by x (e.g. 1)
+ //Tutorial Source:  [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] 
+ */
 function incrementScore() {
 
+    let oldScore = parseInt(document.getElementById("score").innerText);
+    document.getElementById("score").innerText = ++oldScore;
+    /* 
+        *[innerText] and [textContent] are interchangeable. They perform the same functions!
+        * [++oldScore] is a compund operator and can be replaced by [oldScore +1]. The [++] before the variable will add 1. 
+        * putting the [++] after the variable will get the ID of the score and set the inner text to the oldscroe variable. It will then add 1 to the old score. WE DO NOT WANT THIS!
+    */
 }
 
+/**
+ The function [incrementWrongAnswer(){}]: 
+ 1) Is used to get current tally of inccorect answers from the DOM 
+ 2) It increments score by x (e.g. 1)
+ //Tutorial Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] 
+ */
+
 function incrementWrongAnswer() {
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore;
 
 }
 
 // Tutorial Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first]
 function displayAdditionQuestion(operand1, operand2) {
+
     document.getElementById('operand1').textContent = operand1; 
     document.getElementById('operand2').textContent = operand2; 
     document.getElementById('operator').textContent = "+"; 
-
 }
 
-function displaySubtractQuestion() {
+// function displaySubtractQuestion() {
 
-}
+// }
 
-function displayMultiplyQuestion() {
+// function displayMultiplyQuestion() {
 
-}
+// }
 
-function displayMultiplyQuestion() {
+// function displayMultiplyQuestion() {
 
-}
+// }
 
 
 
