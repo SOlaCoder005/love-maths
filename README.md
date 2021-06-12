@@ -25,3 +25,12 @@
 3. JS form the JS file and fetaures. In the following order: 
 - **Functions section:** decide the funamental functions your site need to have then create the respective template functions. Do not fill in yet.
 - **Event handler section** - identify the main event handler functions
+
+#### **[Favicon](https://www.favicon.cc/)** 
+
+Purpose: Alows you to create icon for your web browser.
+
+**How To:**
+- Use the Favicon app to create image
+- attach the import link the **<head>** of the html document.
+- Download and save image to root directory of your repo. 

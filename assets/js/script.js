@@ -36,6 +36,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 // The alert will present pop-up " You clicked [button clicked]"
             })
         }
+
+        //The block of code below check if the key [enter on keybord] was pressed. This will allow user to enter answer by pressing the key rather than button
+        document.getElementById("answer-box").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        })
+        
         runGame("addition");    
 })
 
@@ -45,6 +53,9 @@ The [function runGame(){}...] supports main game loop. It is:
     2) after users' answers has been processed. 
 */
 function runGame(gameType) {
+
+    document.getElementById("answer-box").value = ""; //This set the box to empty string everytime user answers qeustion 
+    document.getElementById("answer-box").focus(); //Ensures the mousecursor will always be in the box to type an anser
 /* 
     Source Tutorial: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/78f3c10a937c4fe09640c7c0098d16bd/?child=first]
     * The console tab in GC Dev Tools was used to test beforehand, before adding this to the .js file
