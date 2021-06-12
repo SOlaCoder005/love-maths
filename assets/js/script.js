@@ -24,12 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let button of buttons) {
             button.addEventListener("click", function() {
                 if (this.getAttribute("data-type") === "submit"){
-                    alert("Submission successful!");
+                    // [ alert("Submission successful!"); ] No longer needed, replaced by [checkAnswer();] function
+                    checkAnswer();
                 } else {
                     let gameType = this.getAttribute("data-type");
                     // Inside this code block [this.] referes to a specific button 
                     // [ alert(`You clicked the ${gameType} button.`); ] This code is commented out as we want the addition game to start once page loads
-                    runGame("agmeType"); //set the parameter in the runGame function outside this code block
+                    runGame("gameType"); //set the parameter in the runGame function outside this code block
                 }
                 // Use back quotes [``] when asigning text to alert code. 
                 // The alert will present pop-up " You clicked [button clicked]"
@@ -51,24 +52,55 @@ function runGame(gameType) {
 */
     let num1 = Math.floor(Math.random() * 25 + 1);
     let num2 = Math.floor(Math.random() * 25 + 1);
-//To test: 1) Pass the gameType into the function as an argument. If correct the question will display.
+
+    //To test: 1) Pass the gameType into the function as an argument. If correct the question will display.
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2); 
     } 
-//To test: 2) If incorrect, it will throw an error [ i.e. use of 'else'], this will appear as a pop-up box in window
+    //To test: 2) If incorrect, it will throw an error [ i.e. use of 'else'], this will appear as a pop-up box in window
     else {
         alert(`Unknown game type: ${gameType}`);
-//This throw message will display in the console when unidentified game type is clicked (e.g. division)
+    //This throw message will display in the console when unidentified game type is clicked (e.g. division)
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
 }
-
+/** 
+ * The function [checkAnswer(){}...] is used to; check the answer against first element in the returned [calculateCorrectAnswer();] array
+*/
+/*Tutorial Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] */
 function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
 
+    if (isCorrect) {
+       alert("Well Done! You aced it, that's the correct answer!"); 
+    } else {
+        alert(`Really? Yuu answered ${userAnswer}. The correct answer is ${calculatedAnswer[0]}, bruh.`);
+    }
+    
+    runGame(calculatedAnswer[1]);
 }
 
+/**
+    The function [calculatedCorrectAnswer(){}...] is used to 
+    1) Get the operand(s) (i.e. numbers) and the operator(s) ("+", "-", "/" and/or "x")
+    from the DOM.
+    2) Returns th correct answer from the  above process
+    Source: [https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+LM101+2021_T1/courseware/2d651bf3f23e48aeb9b9218871912b2e/8775beaed6ed403d92318845af971b30/?child=first] 
+*/
 function calculateCorrectAnswer() {
+//[parseInt] overides JS's default string function (JS handles values as a string). As such [parseInt] handles values as an interger
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById("operator").innerText; 
 
+    if (operator === "+") {
+        return [operand1 + operand2, "additon"];
+    } else {
+        alert(`The operator ${operator} has not been implemented!`);
+        throw `unimplemented operator ${operator}. Aborting!`;
+    }
 }
 
 function incrementScore() {
